@@ -1,10 +1,7 @@
 import { DataTypes } from "sequelize";
-import { getSequelize } from "../config/database";
-import { User } from "./user";
+import { sequelize } from "../config/database.mjs";
 
-const sequelize = getSequelize();
-
-export const Post = sequelize.define(
+const Post = sequelize.define(
   "Post",
   {
     id: {
@@ -20,6 +17,12 @@ export const Post = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    },
   },
   {
     tableName: "posts",
@@ -30,4 +33,4 @@ export const Post = sequelize.define(
   }
 );
 
-Post.hasOne(User);
+export default Post;

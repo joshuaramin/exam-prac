@@ -1,7 +1,6 @@
 import { DataTypes } from "sequelize";
-import { getSequelize } from "../config/database";
-import { Post } from "./post";
-const sequelize = getSequelize();
+import { sequelize } from "../config/database.mjs"; // ✅ shared instance
+import Post from "./post.mjs"; // Import if you want associations
 
 const User = sequelize.define(
   "User",
@@ -39,6 +38,4 @@ const User = sequelize.define(
   }
 );
 
-User.hasMany(Post);
-
-module.exports = User;
+export default User;
